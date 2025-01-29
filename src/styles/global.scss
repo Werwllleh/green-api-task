@@ -1,0 +1,8 @@
+@use "breakpoints";
+@use "variables";
+
+
+.ant-form-item-label,
+.ant-btn {
+  font-family: variables.$ff-main !important;
+}

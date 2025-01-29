@@ -1,0 +1,42 @@
+@use "../variables";
+
+.sign-in-page {
+
+  &__form {
+    position: absolute;
+    margin-inline: auto;
+    inset-inline: 0;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    max-width: 50rem;
+
+    &-body {
+      padding: 2rem;
+      border-radius: variables.$border-radius;
+      overflow: hidden;
+      background-color: variables.$semi-white;
+    }
+
+    .ant-form-item {
+      margin: 0;
+    }
+
+    &-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    &-footer {
+      margin: 2rem 0 0 0;
+      display: flex;
+      justify-content: center;
+
+      .ant-form-item {
+        display: inline-flex;
+      }
+
+    }
+
+  }
+}
