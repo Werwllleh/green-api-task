@@ -1,0 +1,47 @@
+@use "../variables";
+
+.content {
+
+
+  &__body {
+    position: fixed;
+    margin-inline: auto;
+    inset-inline: 0;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    width: calc(100dvw - 3.8rem);
+    max-width: 160rem;
+    height: calc(100dvh - 3.8rem);
+    box-shadow: 0 .6rem 1.8rem variables.$shadow-rgb;
+    margin: 0 auto;
+    background-color: variables.$bg-content;
+    display: flex;
+  }
+
+  &__sidebar {
+    flex: 0 0 7rem;
+    padding: .5rem 1rem;
+  }
+
+  &__preview {
+    position: relative;
+    background-color: variables.$semi-white;
+    flex: 0 1 30%;
+    padding: 5rem 0 0 0;
+
+    &-actions {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem 0;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &__chats {
+    flex: 1 1 65%;
+  }
+
+}

@@ -1,6 +1,34 @@
 @use "breakpoints";
 @use "variables";
 
+.body {
+
+
+
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-field {
+
+      &:nth-child(1) {
+        flex: 0 0 10%;
+        background-color: variables.$bg-green;
+      }
+      &:nth-child(2) {
+        flex: 0 0 90%;
+        background-color: variables.$bg-grey;
+      }
+    }
+  }
+}
 
 .ant-form-item-label,
 .ant-btn {

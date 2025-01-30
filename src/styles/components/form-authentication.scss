@@ -1,0 +1,31 @@
+@use "../variables";
+
+.form-authentication {
+
+  &__body {
+    padding: 2rem;
+    border-radius: variables.$border-radius;
+    overflow: hidden;
+    background-color: variables.$semi-white;
+  }
+
+  .ant-form-item {
+    margin: 0;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__footer {
+    margin: 2rem 0 0 0;
+    display: flex;
+    justify-content: center;
+
+    .ant-form-item {
+      display: inline-flex;
+    }
+  }
+}

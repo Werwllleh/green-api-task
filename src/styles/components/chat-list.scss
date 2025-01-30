@@ -1,0 +1,42 @@
+@use "../variables";
+
+.chat-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  &__dialog {}
+}
+
+.chat-dialog {
+  cursor: pointer;
+  padding: 2rem 1rem;
+  background-color: transparent;
+  transition: background-color variables.$transition;
+
+  &:hover {
+    background-color: variables.$grey-light;
+  }
+
+  &__body {
+    display: flex;
+  }
+
+  &__avatar {}
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    font-weight: 500;
+    font-size: 1.6rem;
+  }
+
+  &__message {}
+
+
+}
