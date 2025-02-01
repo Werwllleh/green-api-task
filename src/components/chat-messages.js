@@ -9,9 +9,6 @@ const ChatMessages = () => {
   const dialogId = useMessagesStore((state) => state.currentDialogId);
   const [messageHistory, setMessageHistory] = useState([]);
 
-  useEffect(() => {
-    console.log(dialogId)
-  }, [dialogId]);
 
   // Загружаем историю сообщений при выборе чата
   useEffect(() => {
