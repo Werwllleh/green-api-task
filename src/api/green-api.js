@@ -4,30 +4,73 @@ export const getUserInfo = async (id, token) => {
   return await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/getWaSettings/${token}`)
 }
 
-export const getLastIncomingMessages = async (id, token) => {
-  return await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/lastIncomingMessages/${token}`)
-}
-
 export const getUserDialogs = async (id, token) => {
-  return await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/getChats/${token}`)
+  try {
+
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/getChats/${token}`);
+    return response.data.filter((chat) => chat.archive !== true && chat.name);
+
+  } catch (error) {
+    console.error("Ошибка получения диалогов:", error);
+  }
 }
 
 export const getChatHistory = async (id, token, chatId, count) => {
+  try {
+    const body = {chatId, count};
 
-  const body = {
-    "chatId": chatId, // ID чата
-    "count": count, // Сообщение
-  };
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/getChatHistory/${token}`,
+      body
+    );
 
-  return await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/getChatHistory/${token}`, body)
+    return response.data.filter((message) => message.textMessage && message.textMessage !== '').reverse();
+
+  } catch (error) {
+    console.error("Ошибка получения истории чата:", error);
+    return []; // В случае ошибки возвращаем пустой массив
+  }
+};
+
+export const sendMessage = async (id, token, chatId, message) => {
+
+  try {
+
+    console.log(chatId)
+
+    const body = {
+      "chatId": chatId.includes('@c.us') ? chatId : `${chatId}@c.us`, // ID чата
+      "message": message, // Сообщение
+    };
+
+    return await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/sendMessage/${token}`, body)
+  } catch (error) {
+    console.error('Ошибка отправки сообщения', error);
+  }
+
 }
 
-export const sendMessage = async (id, token, phoneNumber, message) => {
+// Функция для получения уведомления
+export const receiveNotification = async (id, token) => {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/receiveNotification/${token}`);
 
-  const body = {
-    "chatId": `${phoneNumber}@c.us`, // ID чата
-    "message": message, // Сообщение
-  };
+    return response.data;
 
-  return await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/sendMessage/${token}`, body)
-}
+  } catch (error) {
+    console.error("Ошибка при получении уведомлений:", error);
+  }
+};
+
+// Функция для удаления уведомления
+export const deleteNotification = async (id, token, receiptId) => {
+  try {
+    // console.log('Удаления уведомления')
+    await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/deleteNotification/${token}/${receiptId}`);
+  } catch (error) {
+    console.error("Ошибка при удалении уведомления:", error);
+  }
+};
+
+// setInterval(receiveNotification, 5000); // Проверяем новые сообщения каждые 5 секунд
+

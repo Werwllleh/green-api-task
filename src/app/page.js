@@ -18,8 +18,7 @@ export default async function Home() {
     const response = await getUserInfo(id, token);
     data = response.data;
 
-    const responseChats = await getUserDialogs(id, token);
-    chatList = responseChats.data.filter((chat) => chat.archive !== true && chat.name)
+    chatList = await getUserDialogs(id, token);
   } else {
     redirect('/sign-in')
   }

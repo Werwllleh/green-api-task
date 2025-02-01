@@ -1,5 +1,4 @@
 import '../styles/index.scss';
-import {useUserStore} from "@/stores/user-store";
 
 export const metadata = {
   title: "Green Api Task",

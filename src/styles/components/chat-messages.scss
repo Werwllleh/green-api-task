@@ -1,0 +1,66 @@
+@use "../variables";
+
+.chat-messages {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &__message {
+    max-width: 80%;
+    width: fit-content;
+    overflow: hidden;
+    padding: 1rem;
+    background-color: variables.$white;
+    border-radius: variables.$border-radius;
+    word-wrap: break-word;
+    word-break: break-all;
+
+    &-text {
+      font-size: 1.3rem;
+      white-space: pre-wrap;
+    }
+
+    &.outgoing {
+      margin: 0 0 0 auto;
+    }
+  }
+
+  &__empty {
+    position: absolute;
+    margin-inline: auto;
+    inset-inline: 0;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__textarea {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 0 1rem 1rem;
+    width: 100%;
+    background-color: variables.$bg-content;
+
+    .ant-form-item {
+      margin: 0;
+    }
+
+    &-body {
+      position: relative;
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    &-send {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto 0;
+      height: 100%;
+    }
+  }
+}

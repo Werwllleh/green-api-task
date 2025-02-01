@@ -15,7 +15,7 @@ const NewChat = ({active, setActive}) => {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
+    // console.log(values);
 
     const id = getCookie()?.id;
     const token = getCookie()?.token;
@@ -24,7 +24,7 @@ const NewChat = ({active, setActive}) => {
       const sendMessageResponse = await sendMessage(id, token, values.phoneNumber, values.message);
 
       if (sendMessageResponse.status === 200) {
-        useMessagesStore.setState({ currentDialogId: sendMessageResponse.data.idMessage });
+        useMessagesStore.setState({ currentDialogId: `${values.phoneNumber}@c.us` });
         handleCancel();
         form.resetFields();
       }
