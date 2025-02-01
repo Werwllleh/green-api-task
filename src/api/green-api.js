@@ -65,12 +65,9 @@ export const receiveNotification = async (id, token) => {
 // Функция для удаления уведомления
 export const deleteNotification = async (id, token, receiptId) => {
   try {
-    // console.log('Удаления уведомления')
     await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/deleteNotification/${token}/${receiptId}`);
   } catch (error) {
     console.error("Ошибка при удалении уведомления:", error);
   }
 };
-
-// setInterval(receiveNotification, 5000); // Проверяем новые сообщения каждые 5 секунд
 
