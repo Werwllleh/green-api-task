@@ -1,13 +1,15 @@
 import axios from 'axios';
 
+const URL = process.env.NEXT_PUBLIC_API_URL || "https://api.green-api.com";
+
 export const getUserInfo = async (id, token) => {
-  return await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/getWaSettings/${token}`)
+  return await axios.get(`${URL}/waInstance${id}/getWaSettings/${token}`)
 }
 
 export const getUserDialogs = async (id, token) => {
   try {
 
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/getChats/${token}`);
+    const response = await axios.get(`${URL}/waInstance${id}/getChats/${token}`);
     return response.data.filter((chat) => chat.archive !== true && chat.name);
 
   } catch (error) {
@@ -20,7 +22,7 @@ export const getChatHistory = async (id, token, chatId, count) => {
     const body = {chatId, count};
 
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/getChatHistory/${token}`,
+      `${URL}/waInstance${id}/getChatHistory/${token}`,
       body
     );
 
@@ -43,7 +45,7 @@ export const sendMessage = async (id, token, chatId, message) => {
       "message": message, // Сообщение
     };
 
-    return await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/sendMessage/${token}`, body)
+    return await axios.post(`${URL}/waInstance${id}/sendMessage/${token}`, body)
   } catch (error) {
     console.error('Ошибка отправки сообщения', error);
   }
@@ -53,7 +55,7 @@ export const sendMessage = async (id, token, chatId, message) => {
 // Функция для получения уведомления
 export const receiveNotification = async (id, token) => {
   try {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/receiveNotification/${token}`);
+    const response = await axios.get(`${URL}/waInstance${id}/receiveNotification/${token}`);
 
     return response.data;
 
@@ -65,7 +67,7 @@ export const receiveNotification = async (id, token) => {
 // Функция для удаления уведомления
 export const deleteNotification = async (id, token, receiptId) => {
   try {
-    await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/waInstance${id}/deleteNotification/${token}/${receiptId}`);
+    await axios.delete(`${URL}/waInstance${id}/deleteNotification/${token}/${receiptId}`);
   } catch (error) {
     console.error("Ошибка при удалении уведомления:", error);
   }
